@@ -1,10 +1,11 @@
 let currentGameType = "ورق";
 let rounds = 5;
 let players = [
-  {name:"حازم", score:0},
-  {name:"أحمد", score:0},
-  {name:"علي", score:0},
-  {name:"سجاد", score:0}
+let players = [
+  {name:"", score:0},
+  {name:"", score:0},
+  {name:"", score:0},
+  {name:"", score:0}
 ];
 
 let currentRound = 1;
