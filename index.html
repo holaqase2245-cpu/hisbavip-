@@ -1,38 +1,49 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>حاسبة</title>
+  <title>حسبة</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-  <h1>حاسبة</h1>
+  <div class="app">
 
-  <input type="number" id="num1" placeholder="الرقم الأول">
-  <input type="number" id="num2" placeholder="الرقم الثاني">
+    <header>
+      <h1>حسبة</h1>
+      <p>حاسبة الشدة</p>
+    </header>
 
-  <button onclick="calculate('+')">+</button>
-  <button onclick="calculate('-')">−</button>
-  <button onclick="calculate('*')">×</button>
-  <button onclick="calculate('/')">÷</button>
+    <main>
+      <div class="card">
+        <h2>الحسبة</h2>
 
-  <h2 id="result">النتيجة: 0</h2>
+        <input id="number1" type="number" placeholder="الرقم الأول">
 
-  <script>
-    function calculate(operator) {
-      let a = Number(document.getElementById("num1").value);
-      let b = Number(document.getElementById("num2").value);
-      let result;
+        <select id="operation">
+          <option value="+">جمع +</option>
+          <option value="-">طرح −</option>
+          <option value="*">ضرب ×</option>
+          <option value="/">قسمة ÷</option>
+        </select>
 
-      if (operator === "+") result = a + b;
-      if (operator === "-") result = a - b;
-      if (operator === "*") result = a * b;
-      if (operator === "/") result = b !== 0 ? a / b : "لا يمكن القسمة على صفر";
+        <input id="number2" type="number" placeholder="الرقم الثاني">
 
-      document.getElementById("result").innerText = "النتيجة: " + result;
-    }
-  </script>
+        <button onclick="calculate()">احسب</button>
+
+        <div id="result">النتيجة: 0</div>
+      </div>
+    </main>
+
+    <footer>
+      <p>© حسبة</p>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
 
 </body>
 </html>
