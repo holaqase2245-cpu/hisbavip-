@@ -1,1 +1,47 @@
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 
+class StorageService {
+  static const String _gamesKey = 'saved_games';
+
+  static Future<List<Map<String, dynamic>>> getGames() async {
+    final prefs = await SharedPreferences.getInstance();
+    final data = prefs.getStringList(_gamesKey) ?? [];
+
+    return data
+        .map((item) => jsonDecode(item) as Map<String, dynamic>)
+        .toList();
+  }
+
+  static Future<void> saveGame(Map<String, dynamic> game) async {
+    final games = await getGames();
+    games.insert(0, game);
+
+    final prefs = await SharedPreferences.getInstance();
+
+    await prefs.setStringList(
+      _gamesKey,
+      games.map((game) => jsonEncode(game)).toList(),
+    );
+  }
+
+  static Future<void> deleteGame(int index) async {
+    final games = await getGames();
+
+    if (index >= 0 && index < games.length) {
+      games.removeAt(index);
+    }
+
+    final prefs = await SharedPreferences.getInstance();
+
+    await prefs.setStringList(
+      _gamesKey,
+      games.map((game) => jsonEncode(game)).toList(),
+    );
+  }
+
+  static Future<void> clearGames() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(_gamesKey);
+  }
+}
